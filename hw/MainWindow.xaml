@@ -7,13 +7,15 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="MyConverter"/>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <local:StringToUpperConverter x:Key="StringToUpperConverter" />
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="8*"/>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="8*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -21,14 +23,22 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <TextBox Grid.Column="0" Text="Text1" VerticalAlignment="Center" HorizontalAlignment="Center"
-                 Visibility="{Binding ElementName=CBox1, Path=IsChecked, Converter={StaticResource MyConverter}}" />
-        <TextBox Grid.Column="1" Text="Text2" VerticalAlignment="Center" HorizontalAlignment="Center"
-                 Visibility="{Binding ElementName=CBox2, Path=IsChecked, Converter={StaticResource MyConverter}}" />
-        <TextBox Grid.Column="2" Text="Text3" VerticalAlignment="Center" HorizontalAlignment="Center"
-                 Visibility="{Binding ElementName=CBox3, Path=IsChecked, Converter={StaticResource MyConverter}}" />
-        <CheckBox Name="CBox1" Grid.Row="1" Grid.Column="0" Content="Show" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="True" />
-        <CheckBox Name="CBox2" Grid.Row="1" Grid.Column="1" Content="Show" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="True" />
-        <CheckBox Name="CBox3" Grid.Row="1" Grid.Column="2" Content="Show" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="True" />
+        <TextBox Name="TBox1" Grid.Row="0" Grid.Column="0" Text="Text1" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        <TextBox Name="TBox2" Grid.Row="0" Grid.Column="1" Text="Text2" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        <TextBox Name="TBox3" Grid.Row="0" Grid.Column="2" Text="Text3" VerticalAlignment="Center" HorizontalAlignment="Center" />
+
+        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"
+                   Text="{Binding ElementName=TBox1, Path=Text, Converter={StaticResource StringToUpperConverter}}"
+                   Visibility="{Binding ElementName=CBox1, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
+                   Text="{Binding ElementName=TBox2, Path=Text, Converter={StaticResource StringToUpperConverter}}"
+                   Visibility="{Binding ElementName=CBox2, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <TextBlock Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"
+                   Text="{Binding ElementName=TBox3, Path=Text, Converter={StaticResource StringToUpperConverter}}"
+                   Visibility="{Binding ElementName=CBox3, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        
+        <CheckBox Name="CBox1" Grid.Row="2" Grid.Column="0" Content="Show" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="True" />
+        <CheckBox Name="CBox2" Grid.Row="2" Grid.Column="1" Content="Show" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="True" />
+        <CheckBox Name="CBox3" Grid.Row="2" Grid.Column="2" Content="Show" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="True" />
     </Grid>
 </Window>
